@@ -1,51 +1,51 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+import matplotlib.pyplot as plt  # Import war an falscher stelle
 
+def merge_sort(sort_list):   #Zu langer Variablen Name + Funktionen in Snake Case und lowercase
+    if (len(sort_list) > 1): # Selbe spezifizierungen
+        mid = len(sort_list) // 2
+        left = sort_list[:mid]
+        right = sort_list[mid:]
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+        merge_sort(left)
+        merge_sort(right)
 
-        mergeSort(left)
-        mergeSort(right)
-
-        l = 0
-        r = 0
-        i = 0
+        l = r = i = 0 # Einfachere Definition
 
         while l < len(left) and r < len(right):
             if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
+                sort_list[i] = left[l]     # Assignment Funktion war überflüssig
                 l += 1
             else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
+                sort_list[i] = right[r]
                 r += 1
             i += 1
 
         while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
+            sort_list[i] = left[l]
             l += 1
             i += 1
 
         while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
+            sort_list[i] = right[r]
             r += 1
             i += 1
 
-
-import matplotlib.pyplot as plt
-
 my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
-mergeSort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+ax1.bar(x, my_list)
+ax1.set_xticks(x)
+ax1.set_xlabel("Index")
+ax1.set_ylabel("Wert")
+ax1.set_title("Unsortierte Liste")
+
+merge_sort(my_list)
+
+ax2.bar(x, my_list)
+ax2.set_xticks(x)
+ax2.set_xlabel("Index")
+ax2.set_ylabel("Wert")
+ax2.set_title("Sortierte Liste")
+fig.tight_layout()
 plt.show()
