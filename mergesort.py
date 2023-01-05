@@ -33,9 +33,23 @@ def merge_sort(sort_list):   #Zu langer Variablen Name + Funktionen in Snake Cas
             i += 1
 
 my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-x = range(len(my_list)) # x-Vorher 2mal definiert
-plt.plot(x, my_list)
-plt.show()
-y = merge_sort(my_list)
-plt.plot(x, my_list)
+
+x = range(len(my_list))
+fig, (ax1, ax2) = plt.subplots(1, 2)
+
+ax1.bar(x, my_list)
+ax1.set_xticks(x)
+ax1.set_xlabel("Index")
+ax1.set_ylabel("Wert")
+ax1.set_title("Unsortierte Liste")
+
+merge_sort(my_list)
+
+ax2.bar(x, my_list)
+ax2.set_xticks(x)
+ax2.set_xlabel("Index")
+ax2.set_ylabel("Wert")
+ax2.set_title("Sortierte Liste")
+fig.tight_layout()
+
 plt.show()
